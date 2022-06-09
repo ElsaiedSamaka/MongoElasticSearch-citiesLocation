@@ -1,14 +1,15 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 import axios from "axios";
+import Head from "next/head";
+import { useState } from "react";
+import styles from "../styles/Home.module.css";
 
 const getCitiesOne = async (str) => {
   try {
     let searchableCity = str.replace(/,/g, "");
-    let url = "http://localhost:4000/searchone?city=" + searchableCity;
+    let url =
+      `${process.env.NEXT_PUBLIC_HOST_API}/searchone?city=` + searchableCity;
 
     let { data } = await axios.get(url);
     return data;
@@ -20,7 +21,8 @@ const getCitiesOne = async (str) => {
 const getCitiesTwo = async (str) => {
   try {
     let searchableCity = str.replace(/,/g, "");
-    let url = "http://localhost:4000/searchtwo?city=" + searchableCity;
+    let url =
+      `${process.env.NEXT_PUBLIC_HOST_API}/searchtwo?city=` + searchableCity;
 
     let { data } = await axios.get(url);
     return data;
@@ -70,6 +72,8 @@ export default function Home() {
             />
           )}
         />
+        <br />
+        <br />
         <Autocomplete
           freeSolo
           filterOptions={(x) => x}
